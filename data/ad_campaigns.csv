@@ -1,0 +1,6 @@
+CampaignID,CampaignName,Channel,Budget,Impressions,Clicks,Conversions,CTR
+C001,SummerSale,Facebook,50000,150000,7500,300,0.05
+C002,NewProductLaunch,Google Ads,75000,200000,12000,450,0.06
+C003,BrandAwareness,Instagram,30000,250000,5000,150,0.02
+C004,HolidayPromo,TikTok,45000,300000,15000,600,0.05
+C005,LeadGenCampaign,LinkedIn,60000,100000,4000,200,0.04
