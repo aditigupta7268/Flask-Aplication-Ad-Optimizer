@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ML Insights | AdOptimizer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <nav>
+    <div class="logo">AdOptimizer</div>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/dashboard">Dashboard</a>
+      <a href="/ml_insights" class="active">ML Insights</a>
+      <a href="/optimization">Optimization</a>
+      <a href="/about">About</a>
+    </div>
+    <!-- NEW: Auth buttons -->
+  </nav>
+
+  <div class="container">
+    <h2>Machine Learning Insights</h2>
+    <p>View model predictions, accuracy, and feature importance derived from your ad performance data.</p>
+
+    <div class="card">
+      <h3>Recent Predictions</h3>
+      {% if predictions %}
+        <table>
+          <thead>
+            <tr>
+              <th>Campaign ID</th><th>Predicted CTR (%)</th><th>Predicted Conversions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in predictions %}
+            <tr>
+              <td>{{ row[0] }}</td>
+              <td>{{ "%.2f"|format(row[1] * 100) }}</td> <!-- Assuming CTR is a decimal -->
+              <td>{{ "%.0f"|format(row[2]) }}</td> <!-- Conversions should be whole numbers -->
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p>No predictions yet. Run the ML model to generate insights.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <footer>© 2025 AdOptimizer</footer>
+</body>
+</html>

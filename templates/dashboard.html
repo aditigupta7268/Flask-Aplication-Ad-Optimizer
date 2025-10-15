@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard | AdOptimizer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <nav>
+    <div class="logo">AdOptimizer</div>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/dashboard" class="active">Dashboard</a>
+      <a href="/ml_insights">ML Insights</a>
+      <a href="/optimization">Optimization</a>
+      <a href="/about">About</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h2>Campaign Performance Dashboard</h2>
+    
+    <div class="stat-cards">
+      <div class="stat-card">
+        <h3>Total Impressions</h3>
+        <p class="value">1.2M</p>
+      </div>
+      <div class="stat-card" style="border-color: #eab308;">
+        <h3>Total Clicks</h3>
+        <p class="value">85,430</p>
+      </div>
+      <div class="stat-card" style="border-color: #10b981;">
+        <h3>Total Conversions</h3>
+        <p class="value">12,650</p>
+      </div>
+      <div class="stat-card" style="border-color: #ef4444;">
+        <h3>Total Budget</h3>
+        <p class="value">₹5,00,000</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Clicks vs. Conversions</h3>
+      <canvas id="performanceChart" height="100"></canvas>
+    </div>
+
+    <div class="card">
+        <h3>Detailed Campaign Data</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th><th>Name</th><th>Channel</th><th>Budget (₹)</th>
+              <th>Impressions</th><th>Clicks</th><th>Conversions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for row in data %}
+            <tr>
+              {% for item in row %}
+                <td>{{ item }}</td>
+              {% endfor %}
+            </tr>
+            {% else %}
+            <tr>
+              <td colspan="7">No campaign data available.</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
+  </div>
+
+  <footer>© 2025 AdOptimizer</footer>
+
+  <script>
+    const ctx = document.getElementById('performanceChart').getContext('2d');
+    const performanceChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ['Campaign A', 'Campaign B', 'Campaign C', 'Campaign D', 'Campaign E'],
+            datasets: [{
+                label: 'Clicks',
+                data: [1200, 1900, 3000, 5000, 2300],
+                borderColor: 'rgba(124, 58, 237, 1)',
+                backgroundColor: 'rgba(124, 58, 237, 0.1)',
+                tension: 0.3,
+                fill: true,
+            }, {
+                label: 'Conversions',
+                data: [250, 400, 800, 1100, 600],
+                borderColor: 'rgba(16, 185, 129, 1)',
+                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                tension: 0.3,
+                fill: true,
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: { y: { beginAtZero: true } }
+        }
+    });
+  </script>
+</body>
+</html>
